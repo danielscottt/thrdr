@@ -6,6 +6,7 @@ extern crate comm;
 use std::sync::mpsc;
 use std::thread;
 use std::fs::File;
+use std::time::Duration;
 
 use notify::{RecommendedWatcher, Watcher};
 
@@ -30,8 +31,16 @@ fn main() {
     File::create("/tmp/tstart").unwrap();
     File::create("/tmp/tstop").unwrap();
 
+    println!("touch /tmp/tstart to start threads");
+    println!("touch /tmp/tstop to stop threads");
+
+    // sleep for a bit so we don't catch the create in the watch
+    thread::sleep(Duration::new(1, 0));
+
     sw.watch("/tmp/tstart").unwrap();
     stw.watch("/tmp/tstop").unwrap();
+
+    println!("waiting!");
 
     loop {
         select! {
