@@ -1,0 +1,8 @@
+[package]
+name = "thrdr"
+version = "0.1.0"
+authors = ["dan pittman <danielscottt@gmail.com>"]
+
+[dependencies]
+notify = "^2.5.0"
+comm = { git = "https://github.com/mahkoh/comm" }
